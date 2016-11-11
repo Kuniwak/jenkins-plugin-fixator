@@ -1,0 +1,17 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function is-jenkins-ready() {
+  local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+  local TIMEOUT_SEC=10
+
+
+  "$BASE_PATH/assert-jenkins-endpoint"
+
+
+  curl --fail --head --silent "$ENDPOINT" > /dev/null
+}
+
+
+is-jenkins-ready "$@"

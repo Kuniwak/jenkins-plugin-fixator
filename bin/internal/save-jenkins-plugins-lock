@@ -1,0 +1,14 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function save-jenkins-plugins-lock() {
+  local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+  local jenkins_plugins_lock="$("$BASE_PATH/jenkins-plugins-lock")"
+
+
+  "$BASE_PATH/exec-jenkins-cli" list-plugins | sort > "$jenkins_plugins_lock"
+}
+
+
+save-jenkins-plugins-lock "$@"

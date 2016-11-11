@@ -1,0 +1,13 @@
+#!/bin/bash -e
+set -o pipefail
+
+
+function assert-jenkins-endpoint() {
+	local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+
+
+	[[ -n "$ENDPOINT" ]] || "$BASE_PATH/throw" '$ENDPOINT must be specified like "http://my-jenkins.example.com:8080"'
+}
+
+
+assert-jenkins-endpoint "$@"

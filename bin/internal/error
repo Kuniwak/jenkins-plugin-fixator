@@ -1,0 +1,10 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function print-error() {
+  echo -e "ERROR: $*" 1>&2
+}
+
+
+print-error "$@"

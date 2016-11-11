@@ -1,0 +1,27 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function install-plugins() {
+  local BASE_PATH="$(cd "$(dirname "$0")/.."; pwd)"
+  local plugin_name plugin_version plugin_hpi_url
+
+
+  "$BASE_PATH/internal/assert-jenkins-plugins-lock"
+
+  for line in $(cat "$("$BASE_PATH/internal/jenkins-plugins-lock")" | "$BASE_PATH/internal/parse-list-plugins-result"); do
+    plugin_name="$(echo $line | cut -d":" -f 1)"
+    plugin_version="$(echo $line | cut -d":" -f 2)"
+
+    "$BASE_PATH/internal/log" "Installing $plugin_name $plugin_version..."
+    "$BASE_PATH/internal/install-plugin" "$plugin_name" "$plugin_version"
+  done
+
+
+  "$BASE_PATH/internal/exec-jenkins-cli" safe-restart
+  "$BASE_PATH/internal/log" "Successfully finished."
+  "$BASE_PATH/internal/log" "Restarting to load installed plugins..."
+}
+
+
+install-plugins "$@"

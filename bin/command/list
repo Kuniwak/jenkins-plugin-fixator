@@ -1,0 +1,13 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function print-plugins() {
+  local BASE_PATH="$(cd "$(dirname "$0")/.."; pwd)"
+
+
+  "$BASE_PATH/internal/exec-jenkins-cli" list-plugins
+}
+
+
+print-plugins "$@"

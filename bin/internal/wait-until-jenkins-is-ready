@@ -1,0 +1,28 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function wait-until-jenkins-is-ready() {
+  local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+  local TIMEOUT_SEC=30
+
+
+  "$BASE_PATH/assert-jenkins-endpoint"
+
+
+  for i in $(seq 1 "$TIMEOUT_SEC"); do
+    if "$BASE_PATH/is-jenkins-ready"; then
+      "$BASE_PATH/log" "Jenkins is ready."
+      exit 0
+    else
+      "$BASE_PATH/log" "Waiting until Jenkins is ready ... ($i / $TIMEOUT_SEC)"
+      sleep 1
+    fi
+  done
+
+
+  "$BASE_PATH/throw" "Timeout ($TIMEOUT_SEC sec)."
+}
+
+
+wait-until-jenkins-is-ready "$@"

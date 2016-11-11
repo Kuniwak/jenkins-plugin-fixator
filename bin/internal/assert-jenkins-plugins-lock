@@ -1,0 +1,16 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function assert-jenkins-plugins-lock() {
+  local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+  local jenkins_plugins_lock="$("$BASE_PATH/jenkins-plugins-lock")"
+
+
+  if ! [[ -f "$jenkins_plugins_lock" ]]; then
+    "$BASE_PATH/throw" "JenkinsPlugins.lock is not found."
+  fi
+}
+
+
+assert-jenkins-plugins-lock "$@"

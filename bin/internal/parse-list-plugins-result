@@ -1,0 +1,17 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+# This internal print as bash-friendly result like "plugin-name:x.y.z" by
+# jenkins-cli's list-plugins result. For example:
+#
+#   $ cat list-plugins.stdout
+#   ssh-credentials   SSH Credentials Plugin       1.12
+#   git-client        Git client plugin            2.0.0 (2.1.0)
+#   ...
+#
+#   $ cat list-plugins.stdout | ./parse-list-plugins-result
+#   ssh-credentials:1.12
+#   git-client:2.0.0
+#   ...
+cat - | sed -e 's/\s*([^)]*)$//' | awk '{ print $1 ":" $NF }'

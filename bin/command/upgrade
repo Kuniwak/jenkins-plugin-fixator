@@ -1,0 +1,28 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function upgrade-plugins() {
+  local BASE_PATH="$(cd "$(dirname "$0")/.."; pwd)"
+  local plugin_name plugin_version plugin_hpi_url
+
+
+  "$BASE_PATH/internal/assert-jenkins-plugins-lock"
+
+  for line in $(cat "$("$BASE_PATH/internal/jenkins-plugins-lock")" | "$BASE_PATH/internal/parse-list-plugins-result"); do
+    plugin_name="$(echo $line | cut -d":" -f 1)"
+
+    "$BASE_PATH/internal/log" "Upgrading $plugin_name..."
+    "$BASE_PATH/internal/upgrade-plugin" "$plugin_name"
+  done
+
+
+  "$BASE_PATH/internal/exec-jenkins-cli" safe-restart
+  "$BASE_PATH/internal/log" "Restarting to load upgraded plugins..."
+
+  "$BASE_PATH/internal/save-jenkins-plugins-lock"
+  "$BASE_PATH/internal/log" "Successfully finished. JenkinsPlugins.lock is updated."
+}
+
+
+upgrade-plugins "$@"

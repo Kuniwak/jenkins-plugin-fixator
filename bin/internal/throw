@@ -1,0 +1,13 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function throw() {
+  local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+
+  "$BASE_PATH/error" "$@"
+  exit 1
+}
+
+
+throw "$@"

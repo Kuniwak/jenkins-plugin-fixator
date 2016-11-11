@@ -1,0 +1,15 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+echo 'Usage:  jenkins-plugin-fixator [command]'
+echo ''
+echo 'Commands:  install  Install Jenkins plugins from JenkinsPlugins.lock (requied $ENDPOINT).'
+echo '           upgrade  Upgrade plugins from JenkinsPlugins.lock and update JenkinsPlugins.lock (requied $ENDPOINT).'
+echo '           list     List installed plugins (requied $ENDPOINT).'
+echo '           dump     Dump installed plugins to JenkinsPlugins.lock (requied $ENDPOINT).'
+echo '           help     Print this help and exit successfully.'
+echo ''
+echo 'Environment variables:  $ENDPOINT  Endpoint URL for your Jenkins master such as "http://my-jenkins.example.com:8080".'
+echo ''
+echo 'Config files:  JenkinsPlugins.lock  List for Jenkins plugins and the version (same format as list-plugins result of JenkinsCLI).'

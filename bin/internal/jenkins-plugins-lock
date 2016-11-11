@@ -1,0 +1,10 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function print-jenkins-plugin-lock-path() {
+  echo "$(pwd)/JenkinsPlugins.lock"
+}
+
+
+print-jenkins-plugin-lock-path

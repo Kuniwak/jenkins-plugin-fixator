@@ -1,0 +1,13 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function dump-jenkins-plugins-lock() {
+  local BASE_PATH="$(cd "$(dirname "$0")/.."; pwd)"
+
+  "$BASE_PATH/internal/save-jenkins-plugins-lock"
+  "$BASE_PATH/internal/log" "Successfully finished. JenkinsPlugins.lock is updated."
+}
+
+
+dump-jenkins-plugins-lock "$@"

@@ -1,0 +1,10 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function print-log() {
+  echo -e "LOG: $*" 1>&2
+}
+
+
+print-log "$@"

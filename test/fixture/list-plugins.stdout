@@ -1,0 +1,16 @@
+ssh-credentials   SSH Credentials Plugin       1.12
+git-client        Git client plugin            2.0.0 (2.1.0)
+matrix-project    Matrix Project Plugin        1.7.1
+workflow-scm-step Pipeline: SCM Step           1.14.2 (2.3)
+git               GIT plugin                   2.0.3 (3.0.0)
+github-oauth      GitHub Authentication plugin 0.24
+bouncycastle-api  bouncycastle API Plugin      2.16.0
+structs           Structs Plugin               1.5
+junit             JUnit Plugin                 1.19
+display-url-api   Display URL API              0.5
+mailer            Mailer Plugin                1.18
+credentials       Credentials Plugin           2.1.8
+script-security   Script Security Plugin       1.24
+workflow-step-api Pipeline: Step API           2.5
+scm-api           SCM API Plugin               1.3
+github-api        GitHub API Plugin            1.79

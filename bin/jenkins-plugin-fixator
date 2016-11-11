@@ -1,0 +1,27 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function run-subcommand() {
+  local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+  local sub_command_name sub_command
+
+
+  set +u
+  sub_command_name="$1"
+  set -u
+
+
+  sub_command="$BASE_PATH/command/$sub_command_name"
+
+  if [[ -f "$sub_command" && -x "$sub_command" ]]; then
+    "$sub_command"
+  else
+    "$BASE_PATH/internal/error" "Invalid command: $sub_command_name"
+    "$BASE_PATH/command/help"
+    exit 1
+  fi
+}
+
+
+run-subcommand "$@"
