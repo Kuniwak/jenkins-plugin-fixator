@@ -2,7 +2,7 @@
 set -o pipefail
 
 
-# This internal print as bash-friendly result like "plugin-name:x.y.z" by
+# This script print as a bash-friendly result like "plugin-name:x.y.z" by
 # jenkins-cli's list-plugins result. For example:
 #
 #   $ cat list-plugins.stdout
