@@ -85,7 +85,7 @@ $ jenkins-plugin-fixator help
 About `JenkinsPlugins.lock`
 ---------------------------
 
-`JenkinsPlugins.lock` is a file that have a list for Jenkins plugins and versions.
+`JenkinsPlugins.lock` is a file that have a list of plugin names and versions.
 This is an example for `JenkinsPlugins.lock`:
 
 ```
