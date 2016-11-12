@@ -2,6 +2,11 @@
 set -o pipefail
 
 
+function should-print-help() {
+  echo "$1" | grep -Ew '(-h|--help)' > /dev/null
+}
+
+
 function run-subcommand() {
   local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
   local sub_command_name sub_command
@@ -10,6 +15,12 @@ function run-subcommand() {
   set +u
   sub_command_name="$1"
   set -u
+
+
+  if should-print-help "$*"; then
+    "$BASE_PATH/command/help"
+    exit 0
+  fi
 
 
   sub_command="$BASE_PATH/command/$sub_command_name"
