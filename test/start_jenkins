@@ -40,6 +40,7 @@ function start-jenkins() {
     -Djenkins.install.runSetupWizard=false \
     -jar "$JENKINS_WAR" \
     --httpPort="$JENKINS_PORT" \
+    --sessionTimeout=60000 \
     > "$RESULT_STDOUT" 2> "$RESULT_STDERR" &
 
   echo $! > "$JENKINS_PID"
