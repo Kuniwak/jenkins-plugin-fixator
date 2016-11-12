@@ -14,6 +14,7 @@ function start-jenkins() {
   local JENKINS_WAR="$WORKSPACE/jenkins.war"
   local JENKINS_CONFIG_XML_TEMPLATE="$BASE_PATH/fixture/config.xml"
   local JENKINS_HOME="$WORKSPACE/jenkins"
+  local JENKINS_PID="$WORKSPACE/jenkins.pid"
   local JENKINS_PORT='3001'
   local ENDPOINT="http://localhost:$JENKINS_PORT"
 
@@ -35,8 +36,10 @@ function start-jenkins() {
     -Djenkins.install.runSetupWizard=false \
     -jar "$JENKINS_WAR" \
     --httpPort="$JENKINS_PORT" \
-    > "$RESULT_STDOUT" 2> "$RESULT_STDERR"
+    > "$RESULT_STDOUT" 2> "$RESULT_STDERR" &
+
+  echo $! > "$JENKINS_PID"
 }
 
 
-start-jenkins
+start-jenkins "$@"

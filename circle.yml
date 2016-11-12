@@ -3,11 +3,6 @@ general:
     - /tmp/jenkins-plugin-fixator-test/result
 
 
-dependencies:
-  override:
-    - nohup ./test/start_jenkins &
-
-
 test:
   override:
     - ./test/run_all_tests

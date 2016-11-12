@@ -6,10 +6,15 @@ function run_all_tests() {
   local BASE_PATH="$(cd "$(dirname "$0")/.."; pwd)"
   local test_file
 
+  "$BASE_PATH/test/start_jenkins"
+
+  trap "$BASE_PATH/test/stop_jenkins" EXIT
+  trap "trap - EXIT; $BASE_PATH/test/stop_jenkins; exit -1" SIGHUP SIGINT SIGTERM
+
   for test_file in $(find "$BASE_PATH/test" -name 'test_*' -type f); do
     $test_file
   done
 }
 
 
-run_all_tests
+run_all_tests "$@"
