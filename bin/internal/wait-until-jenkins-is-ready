@@ -13,6 +13,10 @@ function wait-until-jenkins-is-ready() {
   for i in $(seq 1 "$TIMEOUT_SEC"); do
     if "$BASE_PATH/is-jenkins-ready"; then
       "$BASE_PATH/log" "Jenkins is ready."
+
+      # XXX: To avoiding "I/O error in channel Chunked connection".
+      sleep 1
+
       exit 0
     else
       "$BASE_PATH/log" "Waiting until Jenkins is ready ... ($i / $TIMEOUT_SEC)"
