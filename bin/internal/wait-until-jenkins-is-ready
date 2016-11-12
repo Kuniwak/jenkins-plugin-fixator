@@ -4,7 +4,7 @@ set -o pipefail
 
 function wait-until-jenkins-is-ready() {
   local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
-  local TIMEOUT_SEC=30
+  local TIMEOUT_SEC=60
 
 
   "$BASE_PATH/assert-jenkins-endpoint"
