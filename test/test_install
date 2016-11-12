@@ -17,7 +17,7 @@ function run_test() {
 
   local JENKINS_PORT='3001'
   local ENDPOINT="http://localhost:$JENKINS_PORT"
-  local PROJECT_STUB="$WORKSPACE/$(basename "$0")/project_stub"
+  local PROJECT_STUB="$WORKSPACE/project_stub/$(basename "$0")"
 
   source "$BASE_PATH/test/helper.bash"
 
