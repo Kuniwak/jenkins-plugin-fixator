@@ -1,6 +1,8 @@
 Jenkins Plugin Fixator
 ======================
 
+[![CircleCI](https://circleci.com/gh/Kuniwak/jenkins-plugin-fixator/tree/master.svg?style=svg)](https://circleci.com/gh/Kuniwak/jenkins-plugin-fixator/tree/master)
+
 This is a CLI tool to manage Jenkins plugins.
 
 Main features are:
