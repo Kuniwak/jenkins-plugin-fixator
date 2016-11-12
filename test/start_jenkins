@@ -1,0 +1,42 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function start-jenkins() {
+  local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+  local WORKSPACE="/tmp/jenkins-plugin-fixator-test"
+
+  local RESULT_DIR="$WORKSPACE/result"
+  local RESULT_STDOUT="$RESULT_DIR/jenkins.stdout"
+  local RESULT_STDERR="$RESULT_DIR/jenkins.stderr"
+
+  local JENKINS_WAR_URL='http://mirrors.jenkins-ci.org/war-stable/2.19.2/jenkins.war'
+  local JENKINS_WAR="$WORKSPACE/jenkins.war"
+  local JENKINS_CONFIG_XML_TEMPLATE="$BASE_PATH/fixture/config.xml"
+  local JENKINS_HOME="$WORKSPACE/jenkins"
+  local JENKINS_PORT='3001'
+  local ENDPOINT="http://localhost:$JENKINS_PORT"
+
+  # XXX: This lock is not perfect, but we do not need a perfect lock in this test.
+  if curl --fail --head --silent "$ENDPOINT" > /dev/null; then
+    echo "Jenkins is already running. Exit."
+    exit 0
+  fi
+
+  mkdir -p "$WORKSPACE"
+  [[ -f "$JENKINS_WAR" ]] || curl -L "$JENKINS_WAR_URL" > "$JENKINS_WAR"
+
+  # XXX: We do not need auth in this test.
+  mkdir -p "$JENKINS_HOME"
+  cat "$JENKINS_CONFIG_XML_TEMPLATE" > "$JENKINS_HOME/config.xml"
+
+  # XXX: We do not need the setup wizard, because it forcibly enable auth.
+  JENKINS_HOME="$JENKINS_HOME" java \
+    -Djenkins.install.runSetupWizard=false \
+    -jar "$JENKINS_WAR" \
+    --httpPort="$JENKINS_PORT" \
+    > "$RESULT_STDOUT" 2> "$RESULT_STDERR"
+}
+
+
+start-jenkins

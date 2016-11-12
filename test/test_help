@@ -1,0 +1,30 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function run_test() {
+  local BASE_PATH="$(cd "$(dirname "$0")/.."; pwd)"
+  local WORKSPACE="/tmp/jenkins-plugin-fixator-test"
+
+  local BASE_COMMAND="$BASE_PATH/bin/jenkins-plugin-fixator"
+  local RESULT_DIR="$WORKSPACE/result"
+  local RESULT_STDOUT="$RESULT_DIR/$(basename "$0").stdout"
+  local RESULT_STDERR="$RESULT_DIR/$(basename "$0").stderr"
+
+  mkdir -p "$RESULT_DIR"
+  echo > "$RESULT_STDOUT"
+  echo > "$RESULT_STDERR"
+
+  source "$BASE_PATH/test/helper.bash"
+
+
+  "$BASE_COMMAND" "help" \
+    >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
+    && ok "$LINENO" || ng "$LINENO"
+
+  [[ -n "$(cat "$RESULT_STDOUT")" ]] \
+    && ok "$LINENO" || ng "$LINENO"
+}
+
+
+run_test

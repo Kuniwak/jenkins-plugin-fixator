@@ -1,0 +1,15 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function run_all_tests() {
+  local BASE_PATH="$(cd "$(dirname "$0")/.."; pwd)"
+  local test_file
+
+  for test_file in $(find "$BASE_PATH/test" -name 'test_*' -type f); do
+    $test_file
+  done
+}
+
+
+run_all_tests
