@@ -1,0 +1,14 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function stop-jenkins() {
+  local WORKSPACE="/tmp/jenkins-plugin-fixator-test"
+  local JENKINS_PID="$WORKSPACE/jenkins.pid"
+
+  cat "$JENKINS_PID" | xargs kill
+  rm "$JENKINS_PID"
+}
+
+
+stop-jenkins "$@"

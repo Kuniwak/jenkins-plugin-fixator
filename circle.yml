@@ -1,0 +1,8 @@
+general:
+  artifacts:
+    - /tmp/jenkins-plugin-fixator-test/result
+
+
+test:
+  override:
+    - ./test/run_all_tests
