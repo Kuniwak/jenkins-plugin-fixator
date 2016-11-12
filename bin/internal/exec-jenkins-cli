@@ -3,26 +3,26 @@ set -o pipefail
 
 
 function exec-jenkins-cli() {
-	local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
-	local TMP_DIR='/tmp/jenkins-plugin-fixator'
-	local JENKINS_CLI_JAR="$TMP_DIR/jenkins-cli.jar"
+  local BASE_PATH="$(cd "$(dirname "$0")"; pwd)"
+  local TMP_DIR='/tmp/jenkins-plugin-fixator'
+  local JENKINS_CLI_JAR="$TMP_DIR/jenkins-cli.jar"
 
 
   "$BASE_PATH/assert-jenkins-endpoint"
   "$BASE_PATH/wait-until-jenkins-is-ready"
 
 
-	if ! [[ -f "$JENKINS_CLI_JAR" ]]; then
-		"$BASE_PATH/log" "Fetching jenkins-cli.jar..."
+  if ! [[ -f "$JENKINS_CLI_JAR" ]]; then
+    "$BASE_PATH/log" "Fetching jenkins-cli.jar..."
 
-		mkdir -p "$TMP_DIR"
-		curl -sL "$ENDPOINT/jnlpJars/jenkins-cli.jar" > "$JENKINS_CLI_JAR"
+    mkdir -p "$TMP_DIR"
+    curl -sL "$ENDPOINT/jnlpJars/jenkins-cli.jar" > "$JENKINS_CLI_JAR"
 
-		"$BASE_PATH/log" "Successfully fetching jenkins-cli.jar."
-	fi
+    "$BASE_PATH/log" "Successfully fetching jenkins-cli.jar."
+  fi
 
 
-	java -jar "$JENKINS_CLI_JAR" -s "$ENDPOINT" "$@"
+  java -jar "$JENKINS_CLI_JAR" -s "$ENDPOINT" "$@"
 }
 
 
