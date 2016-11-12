@@ -2,6 +2,11 @@
 set -o pipefail
 
 
+function should-print-version() {
+  echo "$1" | grep -Ew '(-v|--version)' > /dev/null
+}
+
+
 function should-print-help() {
   echo "$1" | grep -Ew '(-h|--help)' > /dev/null
 }
@@ -19,6 +24,12 @@ function run-subcommand() {
 
   if should-print-help "$*"; then
     "$BASE_PATH/command/help"
+    exit 0
+  fi
+
+
+  if should-print-version "$*"; then
+    "$BASE_PATH/command/version"
     exit 0
   fi
 

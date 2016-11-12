@@ -9,6 +9,7 @@ echo '           upgrade  Upgrade plugins from JenkinsPlugins.lock and update Je
 echo '           list     List installed plugins (requied $ENDPOINT).'
 echo '           dump     Dump installed plugins to JenkinsPlugins.lock (requied $ENDPOINT).'
 echo '           help     Print this help and exit successfully.'
+echo '           version  Print the version'
 echo ''
 echo 'Environment variables:  $ENDPOINT  Endpoint URL for your Jenkins master such as "http://my-jenkins.example.com:8080".'
 echo ''
