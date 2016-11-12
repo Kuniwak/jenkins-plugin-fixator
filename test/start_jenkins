@@ -10,6 +10,10 @@ function start-jenkins() {
   local RESULT_STDOUT="$RESULT_DIR/jenkins.stdout"
   local RESULT_STDERR="$RESULT_DIR/jenkins.stderr"
 
+  mkdir -p "$RESULT_DIR"
+  echo > "$RESULT_STDOUT"
+  echo > "$RESULT_STDERR"
+
   local JENKINS_WAR_URL='http://mirrors.jenkins-ci.org/war-stable/2.19.2/jenkins.war'
   local JENKINS_WAR="$WORKSPACE/jenkins.war"
   local JENKINS_CONFIG_XML_TEMPLATE="$BASE_PATH/fixture/config.xml"
