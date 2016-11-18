@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 set -o pipefail
+set -x
 
 
 function is-jenkins-ready() {
@@ -10,7 +11,7 @@ function is-jenkins-ready() {
   "$BASE_PATH/assert-jenkins-endpoint"
 
 
-  curl --fail --head --silent "$ENDPOINT" > /dev/null
+  curl --fail --head "$ENDPOINT"
 }
 
 
