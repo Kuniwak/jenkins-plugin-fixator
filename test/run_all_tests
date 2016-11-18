@@ -11,7 +11,7 @@ function run_all_tests() {
   trap "$BASE_PATH/test/stop_jenkins" EXIT
   trap "trap - EXIT; $BASE_PATH/test/stop_jenkins; exit -1" SIGHUP SIGINT SIGTERM
 
-  for test_file in $(find "$BASE_PATH/test" -name 'test_*' -type f); do
+  for test_file in $(find "$BASE_PATH/test" -name 'test_*' -type f | grep -v "test_\(install\|upgrade\)"); do
     $test_file
   done
 }
