@@ -8,7 +8,7 @@ echo 'Commands:  install  Install Jenkins plugins from JenkinsPlugins.lock (requ
 echo '           upgrade  Upgrade plugins from JenkinsPlugins.lock and update JenkinsPlugins.lock (requied $ENDPOINT).'
 echo '           list     List installed plugins (requied $ENDPOINT).'
 echo '           dump     Dump installed plugins to JenkinsPlugins.lock (requied $ENDPOINT).'
-echo '           await    Wait until Jenkins is ready.
+echo '           await    Wait until Jenkins is ready.'
 echo '           help     Print this help and exit successfully.'
 echo '           version  Print the version'
 echo ''
