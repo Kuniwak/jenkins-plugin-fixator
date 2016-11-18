@@ -24,12 +24,16 @@ function run_test() {
 
   (mkdir -p "$PROJECT_STUB" && cd "$PROJECT_STUB"
 
+    sleep 10
+
     # "greenballs" is a very small isolated plugin.
     echo "greenballs  Green Balls  1.15" > "./JenkinsPlugins.lock"
 
     ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "install" \
       >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
       && ok "$LINENO" || ng "$LINENO"
+
+    sleep 10
 
     # Expect "greenballs" to be listed as an installed plugin.
     ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "list" 2> /dev/null \

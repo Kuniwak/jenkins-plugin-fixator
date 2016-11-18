@@ -24,6 +24,8 @@ function run_test() {
 
   (mkdir -p "$PROJECT_STUB" && cd "$PROJECT_STUB"
 
+    sleep 10
+
     # "greenballs" is a very small isolated plugin.
     # And 1.10 is an old version.
     echo "greenballs  Green Balls  1.10" > './JenkinsPlugins.lock'
@@ -31,6 +33,8 @@ function run_test() {
     ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "install" \
       >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
       && ok "$LINENO" || ng "$LINENO"
+
+    sleep 10
 
     ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "upgrade" \
       >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
