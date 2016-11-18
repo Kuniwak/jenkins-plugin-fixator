@@ -23,9 +23,6 @@ function run_test() {
 
 
   (mkdir -p "$PROJECT_STUB" && cd "$PROJECT_STUB"
-
-    sleep 10
-
     # "greenballs" is a very small isolated plugin.
     # And 1.10 is an old version.
     echo "greenballs  Green Balls  1.10" > './JenkinsPlugins.lock'
@@ -34,7 +31,7 @@ function run_test() {
       >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
       && ok "$LINENO" || ng "$LINENO"
 
-    sleep 10
+    sleep "$EXPLICIT_WAIT_SEC"
 
     ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "upgrade" \
       >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
@@ -43,6 +40,8 @@ function run_test() {
     # Expect "greenballs" to be upgraded from 1.10.
     grep --invert-match '1.10' './JenkinsPlugins.lock' > /dev/null \
       && ok "$LINENO" || ng "$LINENO"
+
+    sleep "$EXPLICIT_WAIT_SEC"
   )
 }
 

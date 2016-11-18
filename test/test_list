@@ -24,6 +24,8 @@ function run_test() {
   ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "list" \
     >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
     && ok "$LINENO" || ng "$LINENO"
+
+	sleep "$EXPLICIT_WAIT_SEC"
 }
 
 
