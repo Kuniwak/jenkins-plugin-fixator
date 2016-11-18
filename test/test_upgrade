@@ -31,8 +31,6 @@ function run_test() {
       >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
       && ok "$LINENO" || ng "$LINENO"
 
-    sleep "$EXPLICIT_WAIT_SEC"
-
     ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "upgrade" \
       >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
       && ok "$LINENO" || ng "$LINENO"
@@ -40,8 +38,6 @@ function run_test() {
     # Expect "greenballs" to be upgraded from 1.10.
     grep --invert-match '1.10' './JenkinsPlugins.lock' > /dev/null \
       && ok "$LINENO" || ng "$LINENO"
-
-    sleep "$EXPLICIT_WAIT_SEC"
   )
 }
 
