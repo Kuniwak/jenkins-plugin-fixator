@@ -17,24 +17,13 @@ function run_test() {
 
   local JENKINS_PORT='3001'
   local ENDPOINT="http://localhost:$JENKINS_PORT"
-  local PROJECT_STUB="$WORKSPACE/project_stub/$(basename "$0")"
 
   source "$BASE_PATH/test/helper.bash"
 
 
-  (mkdir -p "$PROJECT_STUB" && cd "$PROJECT_STUB"
-    # "greenballs" is a very small isolated plugin.
-    echo "greenballs  Green Balls  1.15" > "./JenkinsPlugins.lock"
-
-    ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "install" \
-      >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
-      && ok "$LINENO" || ng "$LINENO"
-
-    # Expect "greenballs" to be listed as an installed plugin.
-    ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "list" 2> /dev/null \
-      | grep "greenballs" > /dev/null \
-      && ok "$LINENO" || ng "$LINENO"
-  )
+  ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "await" \
+    >> "$RESULT_STDOUT" 2>> "$RESULT_STDERR" \
+    && ok "$LINENO" || ng "$LINENO"
 }
 
 

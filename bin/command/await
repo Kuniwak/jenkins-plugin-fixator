@@ -1,0 +1,15 @@
+#!/bin/bash -eu
+set -o pipefail
+
+
+function wait-until-jenkins-is-ready() {
+  local BASE_PATH="$(cd "$(dirname "$0")/.."; pwd)"
+
+
+  "$BASE_PATH/internal/wait-until-jenkins-is-ready"
+}
+
+
+
+
+wait-until-jenkins-is-ready "$@"

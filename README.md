@@ -74,6 +74,16 @@ $ ENDPOINT="http://my-jenkins.example.com:8080" jenkins-plugin-fixator list
 
 
 
+### await
+
+Wait until Jenkins is ready (requied `$ENDPOINT`).
+
+```console
+$ ENDPOINT="http://my-jenkins.example.com:8080" jenkins-plugin-fixator await
+```
+
+
+
 ### help
 
 Print the help and exit successfully.
