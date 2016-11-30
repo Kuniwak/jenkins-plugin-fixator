@@ -3,9 +3,9 @@ set -o pipefail
 
 
 function print-version() {
-	local BASE_PATH="$(cd "$(dirname "$0")/../.."; pwd)"
+  local BASE_PATH="$(cd "$(dirname "$0")/../.."; pwd)"
 
-	cat "$BASE_PATH/VERSION"
+  cat "$BASE_PATH/VERSION"
 }
 
 
