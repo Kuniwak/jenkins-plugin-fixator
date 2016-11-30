@@ -31,8 +31,10 @@ function start-jenkins() {
   mkdir -p "$WORKSPACE"
   [[ -f "$JENKINS_WAR" ]] || curl --fail --location "$JENKINS_WAR_URL" > "$JENKINS_WAR"
 
-  # XXX: We do not need auth in this test.
+  [[ -n "$JENKINS_HOME" ]] || rm -rf "$JENKINS_HOME"
   mkdir -p "$JENKINS_HOME"
+
+  # XXX: We do not need auth in this test.
   cat "$JENKINS_CONFIG_XML_TEMPLATE" > "$JENKINS_HOME/config.xml"
 
   # XXX: We do not need the setup wizard, because it forcibly enable auth.
