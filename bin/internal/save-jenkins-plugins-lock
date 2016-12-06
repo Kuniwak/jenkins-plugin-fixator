@@ -7,7 +7,7 @@ function save-jenkins-plugins-lock() {
   local jenkins_plugins_lock="$("$BASE_PATH/jenkins-plugins-lock")"
 
 
-  "$BASE_PATH/exec-jenkins-cli" list-plugins | sort > "$jenkins_plugins_lock"
+  "$BASE_PATH/exec-jenkins-cli" list-plugins | sed -e 's/ *([^)]*)$//' | sort > "$jenkins_plugins_lock"
 }
 
 
