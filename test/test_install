@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 set -o pipefail
+set -x
 
 
 function run_test() {
@@ -31,8 +32,8 @@ function run_test() {
       && ok "$LINENO" || ng "$LINENO"
 
     # Expect "greenballs" to be listed as an installed plugin.
-    ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "list" 2> /dev/null \
-      | grep "greenballs" > /dev/null \
+    ENDPOINT="$ENDPOINT" "$BASE_COMMAND" "list" \
+      | grep "greenballs" \
       && ok "$LINENO" || ng "$LINENO"
   )
 }

@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 set -o pipefail
+set -x
 
 
 function run_test() {
@@ -36,7 +37,7 @@ function run_test() {
       && ok "$LINENO" || ng "$LINENO"
 
     # Expect "greenballs" to be upgraded from 1.10.
-    grep --invert-match '1.10' './JenkinsPlugins.lock' > /dev/null \
+    grep --invert-match '1.10' './JenkinsPlugins.lock' \
       && ok "$LINENO" || ng "$LINENO"
   )
 }

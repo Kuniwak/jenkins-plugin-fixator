@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 set -o pipefail
+set -x
 
 
 # This script print as a bash-friendly result like "plugin-name:x.y.z" by

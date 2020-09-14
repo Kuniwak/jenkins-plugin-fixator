@@ -23,16 +23,18 @@ function start-jenkins() {
   local ENDPOINT="http://localhost:$JENKINS_PORT"
 
   # XXX: This lock is not perfect, but we do not need a perfect lock in this test.
-  if curl --fail --head --silent --location "$ENDPOINT" > /dev/null; then
+  if curl --fail --head --silent --location "$ENDPOINT"; then
     echo "Jenkins is already running. Exit."
     exit 0
   fi
 
   mkdir -p "$WORKSPACE"
-  [[ -f "$JENKINS_WAR" ]] || curl --fail --silent --location "$JENKINS_WAR_URL" > "$JENKINS_WAR"
+  [[ -f "$JENKINS_WAR" ]] || curl --fail --location "$JENKINS_WAR_URL" > "$JENKINS_WAR"
+
+  [[ -n "$JENKINS_HOME" ]] || rm -rf "$JENKINS_HOME"
+  mkdir -p "$JENKINS_HOME"
 
   # XXX: We do not need auth in this test.
-  mkdir -p "$JENKINS_HOME"
   cat "$JENKINS_CONFIG_XML_TEMPLATE" > "$JENKINS_HOME/config.xml"
 
   # XXX: We do not need the setup wizard, because it forcibly enable auth.

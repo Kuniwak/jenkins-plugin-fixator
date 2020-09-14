@@ -1,5 +1,6 @@
 #!/bin/bash -eu
 set -o pipefail
+set -x
 
 
 function save-jenkins-plugins-lock() {
