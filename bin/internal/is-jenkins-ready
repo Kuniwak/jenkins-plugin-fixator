@@ -10,7 +10,7 @@ function is-jenkins-ready() {
   "$BASE_PATH/assert-jenkins-endpoint"
 
 
-  curl --fail --head --silent "$ENDPOINT" > /dev/null
+  curl --fail --head --silent --show-error --no-location "$ENDPOINT" >/dev/null
 }
 
 
